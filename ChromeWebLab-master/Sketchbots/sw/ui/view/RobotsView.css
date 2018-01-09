@@ -1,0 +1,615 @@
+/*
+    Copyright 2013 Google Inc
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+/*
+ * fonts
+ */
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+@font-face {
+    font-family: 'DejaVu Sans Mono';
+    src: url('libs/webfonts/DejaVu/DejaVuSansMono-webfont.eot');
+    src: url('libs/webfonts/DejaVu/DejaVuSansMono-webfont.eot?#iefix') format('embedded-opentype'),
+         url('libs/webfonts/DejaVu/DejaVuSansMono-webfont.woff') format('woff'),
+         url('libs/webfonts/DejaVu/DejaVuSansMono-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/*
+ * animations
+ */
+@-webkit-keyframes NewObject {
+    0%    {
+        opacity: 0.1;
+    }
+    100%  {
+        opacity: 1.0;
+    }
+}
+
+
+/*
+ * styles
+ */
+
+/**** base styles ****/
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'DejaVu Sans Mono','Courier New',Courier,monospace;
+	font-size: 11px;
+	line-height: 14px;
+	color: #5c6665;
+
+	background: rgb(217,219,219);
+	 /* @alternate */ background: -moz-linear-gradient(top, rgba(240,242,242,1) 0%, rgba(217,219,219,1) 100%);
+	 /* @alternate */ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(240,242,242,1)), color-stop(100%,rgba(217,219,219,1)));
+	 /* @alternate */ background: linear-gradient(top, rgba(240,242,242,1) 0%,rgba(217,219,219,1) 100%);
+	background-attachment: fixed;
+}
+h1, h2, h3, h4 {
+}
+h4 {
+	font-family: 'Roboto',sans-serif !important;
+	font-weight: bold;
+	color: #3e4544;
+	font-size: 14px;
+}
+h1, h2 {
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto Condensed',sans-serif !important;
+	font-weight: normal;
+	color: #3e4544;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+button {
+	font-family: 'Roboto Condensed',sans-serif !important;
+	font-weight: bold;
+	font-size: 12px;
+	line-height:25px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	cursor:pointer;
+
+	padding-left:16px;
+	padding-right:16px;
+	padding-top:0px;
+	padding-bottom:0px;
+	height:auto;
+	width:auto;
+	pointer-events:auto;
+	border:none;
+
+	color: #3f4544; /* #5c6665; */
+	background-color:#d2d4d4;
+
+	margin:0px 2px 2px 0px;
+}
+button:hover {
+	background-color:#c3c5c5;
+}
+
+button.Save, button.Cancel {
+	color:white;
+
+	background: rgb(223,137,140); /* Old browsers */
+	 /* @alternate */ background: -moz-linear-gradient(left,  rgba(223,137,140,1) 0%, rgba(227,151,128,1) 100%); /* FF3.6+ */
+	 /* @alternate */ background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(223,137,140,1)), color-stop(100%,rgba(227,151,128,1))); /* Chrome,Safari4+ */
+	 /* @alternate */ background: -webkit-linear-gradient(left,  rgba(223,137,140,1) 0%,rgba(227,151,128,1) 100%); /* Chrome10+,Safari5.1+ */
+	 /* @alternate */ background: linear-gradient(left,  rgba(223,137,140,1) 0%,rgba(227,151,128,1) 100%); /* W3C */
+
+	-moz-transform:translateY(0px) scale(1.03, 1.09);
+
+	 background-image: url("libs/images/buttonGradientOrange.svg");
+	 background-position: 0% 0%;
+	 background-repeat: no-repeat;
+
+}
+button.Save:hover, button.Cancel:hover {
+	background-position: 0% 50%;
+}
+
+.New {
+	-webkit-animation: CreatableObject 3s;
+}
+
+/**** page furniture ****/
+#globalContainer {
+	background-image: url('libs/images/robots/bg_grid.png');
+	background-repeat: no-repeat;
+	background-position: left;
+	height: 580px;
+}
+#grandWLWrapper {
+	width: 960px;
+	margin: 0 auto;
+	padding-top: 14px;
+}
+#header {
+	margin: 0;
+	padding-left: 75px;
+	background-image: url('libs/images/robots/robots-icon.svg');
+	position: relative;
+	cursor: pointer;
+	background-position: 0px 4px;
+	background-repeat: no-repeat;
+	background-size: 64px;
+}
+#header h2 {
+	line-height: 18px;
+	font-size: 14px;
+}
+#header h1 {
+	line-height: 23px;
+	font-size: 25px;
+}
+
+/**** whole UI ****/
+#uiContainer {
+	margin-left: 75px;
+}
+
+/**** add boxes ****/
+.AddBoxWrapper {
+}
+.AddBoxWrapper .Background {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	padding-top: 50px;
+	background-color: rgba(0,0,0,0.25);
+}
+.AddBoxWrapper .Window {
+	margin: 0 auto;
+	width: 500px;
+	height: 500px;
+	background: -webkit-linear-gradient(top,#ffffff 0%,#d9dbdb 100%);
+	padding: 10px;
+}
+.AddBoxWrapper .Help {
+	margin: 10px;
+	padding: 8px;
+	padding-bottom: 16px;
+}
+.AddBoxWrapper .Tools {
+	display:  block;
+	text-align: center;
+	padding: 10px;
+}
+.AddBoxWrapper input.File {
+	display: block;
+	width: 475px;
+	text-align: center;
+	margin: 0 auto;
+	color: #fff;
+	background-color: #fff;
+	border: 3px solid #fff;
+	padding: 10px;
+}
+.AddBoxWrapper .Tools button {
+	margin-left: 3px;
+	margin-right: 3px;
+}
+.Preview {
+	display: block;
+	width: 495px;
+	height: 300px;
+	text-align: center;
+	border-left: 3px solid #fff;
+	border-top: 3px solid #fff;
+	border-right: 3px solid #fff;
+	background-color: black;
+}
+.Preview.Empty {
+	background-color: #eee;
+}
+
+/**** file picker add box ****/
+
+/**** webcam add box ****/
+.AddBoxWrapper #webCamPreviewHolder {
+	text-align: center;
+	height: 352px;
+}
+.AddBoxWrapper #webCamTools {
+}
+.AddBoxWrapper #webCamPreviewHolder video {
+}
+
+/**** queue topic lists ****/
+
+/* lists */
+.TaskListWrapper {
+	display: block;
+	float: left;
+	width: 253px;
+	margin-right: 30px;
+	border-right: 1px solid #fff;
+	margin-top: 3px;
+	margin-bottom: 30px;
+}
+
+/* new task tools */
+.TaskListWrapper .ListTools {
+}
+
+.TaskListWrapper .ListTools button {
+	display: block;
+	width: 220px;
+	text-align: left;
+}
+img#filePickerPreview, div#filePickerPreviewScene {
+	width: 300px;
+	height: 45%;
+	background-color: black;
+}
+
+.TaskList {
+}
+.TaskList.Working {
+	height: 653px;
+}
+.TaskList.Waiting {
+	height: 600px;
+}
+.TaskList.Completed {
+	height: 653px;
+}
+.TaskList.Waiting, .TaskList.Completed {
+	overflow: scroll;
+}
+.TaskList .Loading {
+	display: none;
+}
+.TaskList.New .Loading {
+	display: block;
+}
+
+/* task blocks */
+.Task {
+	display: block;
+	float: left;
+	margin: 0px 0px 6px 6px;
+
+	width: 200px;
+	background-color: white;
+ 	padding: 6px;
+}
+
+.Task .TaskInfo {
+ 	padding-bottom: 20px;
+ 	min-height: 210px;
+}
+
+.Task .TaskInfo .TaskImage {
+	width: 200px;
+	min-height: 100px;
+}
+.Task .TaskInfo .TaskImage .Main {
+	/* position: absolute; */
+	width: 196px;
+	min-height: 150px;
+	float: left;
+	border: 2px solid #eee;
+	text-align: center;
+}
+.Task .TaskInfo .TaskImage .Mini {
+	position: relative;
+	top: -44px;
+	height: 40px;
+	border: 2px solid #eee;
+}
+.Task .TaskInfo .TaskImage div.Mini {
+	display: inline;
+	background-color: white;
+	width: 40px;
+	top: -14px;
+	height: 16px;
+	font-size: 8px;
+}
+
+.Task .TaskInfo .WorkerGUID {
+	display: block;
+	width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis-word;
+}
+
+.Task .TaskTools {
+	text-align: left;
+	width: 200px;
+}
+
+.Task .TaskTools button {
+	font-size: 11px;
+	font-weight: normal;
+	background-image: url('libs/images/link-icon.png');
+	background-repeat: no-repeat;
+	background-position: 87% 50%;
+	padding-right: 24px;
+	text-align: left;
+}
+
+.Task .TaskTools button.RejectButton {
+	background-image: url('libs/images/trash_small_idle.svg');
+	background-repeat: no-repeat;
+	background-position: 8px 3px;
+
+	padding: 0;
+	width: 28px;
+
+	float: right;
+}
+.Task .TaskTools button.RejectButton:hover {
+	background-image: url('libs/images/trash_small_rollover.svg');
+}
+.Task .TaskTools button.ViewPreview {
+	width: 160px;
+}
+
+.GlobalNav {
+	display: none;
+	z-index: 1;
+}
+
+#GlobalNavTrigger {
+	display: none;
+	animation: fadein 2s;
+	-moz-animation: fadein 2s; /* Firefox */
+	-webkit-animation: fadein 2s; /* Safari and Chrome */
+	-o-animation: fadein 2s; /* Opera */
+}
+
+/*@media screen, handheld*/
+@media only screen
+and (min-width: 616px)
+and (max-width: 960px) {
+
+	#globalContainer {
+		width: 100%;
+	}
+
+	#grandWLWrapper {
+		width: 615px;
+		margin: 0 auto;
+		padding-top: 14px;
+	}
+	#uiContainer {
+		margin: 0;
+	}
+
+	.TaskListWrapper {
+		width: 190px;
+		padding: 5px;
+		margin: auto;
+	}
+
+	.TaskListWrapper .ListTools button {
+		width: 190px;
+	}
+
+	.Task {
+		display: block;
+		float: left;
+		width: 100%;
+
+		margin: auto;
+		padding: 0 2px;
+	}
+
+	.Task .TaskTools {
+		text-align: center;
+		width: 100%;
+	}
+
+	.Task .TaskTools button,
+	.Task .TaskTools button.ViewPreview {
+		width: 95%;
+	}
+}
+
+/*@media screen, handheld*/
+@media only screen
+and (min-width: 320px)
+and (max-width: 615px) {
+/*and (orientation: portrait) {*/
+
+	#globalContainer {
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+
+	#grandWLWrapper {
+		width: 100%;
+		overflow-x: hidden;
+		margin: 0 auto;
+		padding-top: 5px;
+	}
+
+	#uiContainer {
+		margin: 1px;
+	}
+
+	#header {
+		margin-left: 50px;
+	}
+
+
+	#GlobalNavTrigger {
+		display: block;
+		position: fixed;
+		bottom: 8px;
+		left: -15px;
+		line-height: 1.4em;
+		font-size: 4em;
+		opacity: 0.4;
+		border: 1px solid grey;
+		border-radius: 4px;
+		height: 1.1em;
+		background-color: lightgray;
+	}
+
+	.GlobalNav {
+		position: absolute;
+		left: -200px;
+		width: 200px;
+		height: 100%;
+		display: block;
+		float: left;
+
+		background-color: rgb(141, 141, 141);
+		transition: left 0.5s ease;
+		-webkit-transition: left 0.5s ease;
+	}
+
+	.GlobalNav h1 {
+		padding: 15px 0;
+		text-align: center;
+		color: white;
+	}
+
+	.GlobalNav ul {
+		display: block;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.GlobalNav li {
+		display: block;
+		padding-left: 20px;
+		font-size: large;
+		line-height: 5em;
+		color: lightgrey;
+		border: 1px solid grey;
+		border-collapse: collapse;
+	}
+
+	.GlobalNav.Active {
+		left: 0;
+		transition: left 0.5s ease;
+		webkit-transition: left 0.5s ease;
+	}
+
+	.topicQueuesContainer {
+		display: none;
+		width: 100%;
+		margin: 5px;
+	}
+
+	.TaskListWrapper {
+		display: none;
+		float: none;
+		border: none;
+		width: 96%;
+		padding: 0;
+		margin: 0 auto;
+	}
+
+	.Task {
+		display: block;
+		float: left;
+		width: 95%;
+
+		margin: auto;
+		padding: 0 4px;
+	}
+
+	.Task .TaskInfo .TaskImage {
+		width: 95%;
+		margin: 0 auto;
+	}
+
+	.Task .TaskInfo .TaskImage .Main {
+		width: 95%;
+		margin: 0 auto;
+	}
+
+	.Task .TaskTools {
+		width: 100%;
+	}
+
+	.Task .TaskTools button {
+		display: block;
+		float: none !important;
+		padding: 4px 8px;
+		margin: 2px auto;
+		text-align: left;
+		font-size: 1.4em;
+		line-height: 1.4em;
+		width: 10em !important;
+	}
+
+	.TaskListWrapper .ListTools button {
+		width: 95%;
+		font-size: 2em;
+		height: 4.5em;
+		margin-bottom: 1em;
+	}
+
+	.Active {
+		display: block;
+	}
+
+	.TopicQueue h3 {
+		visibility: hidden;
+	}
+
+	.AddBoxWrapper .Window {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		/*overflow-x: hidden;*/
+	}
+
+	.Preview {
+		padding: 2px 0;
+		width: inherit;
+		height: auto !important;
+		text-align: left;
+		border: none;
+	}
+
+	.Preview video,
+	.Preview canvas,
+	.Preview img {
+		display: block;
+		width: 99%;
+		height: 100%;
+		margin: 0 auto;
+	}
+
+	#filePickerTools button,
+	#webCamTools button {
+		margin: 0.2em;
+		padding: 0.6em;
+		font-size: 1.5em;
+	}
+}
+
+@media only screen
+and (min-width: 320px)
+and (max-width: 615px)
+and (orientation: landscape) {
+	.Preview {
+		height: 55% !important;
+		overflow-y: hidden;
+	}
+}
